@@ -1,0 +1,59 @@
+#inicio{
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	margin-top: auto;
+	background-color: rgb(241, 241, 241, 0.9)!important;
+}
+
+#inicio-img{
+	position: absolute;
+	
+}
+
+#formu-login{
+	
+	border-radius: 2px;
+	justify-content: left;
+	align-items: center;
+	display: flex;
+	padding: 5px;
+	margin: 75px;
+}
+
+
+#formu-login .form-img{
+	position: relative;
+	align-items: center;
+	width:185px;
+	height:110px;
+	margin: 5px;
+}
+
+#formu {
+	background-color: #f3f4f5!important;
+	border-radius: 5px;
+	justify-content: left;
+	align-items: center;
+	display: flex;
+	padding: 5px;
+}
+
+#btn-formu{
+	justify-content: center;
+	align-items: center;
+}
+
+
+#listado {
+	border-radius: 5px;
+	padding: 20px;
+}
+
+
+#pie{
+	text-align: center;
+	vertical-align: middle;
+	font-size: medium;
+}

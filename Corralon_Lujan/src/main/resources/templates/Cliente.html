@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="template :: head(title)">
+</head>
+
+<!-- BODY -->
+<body>
+    <!-- ENCABEZADO -->
+    <header th:replace="template :: header"></header>
+    
+    <!-- CONTENIDO -->
+    <main>
+        <br>
+    <div class="container">
+        <div class="row">
+            <h5 class="txtcenter">Registro de Clientes</h5>
+            <br>
+            <form th:action=@{/saveCliente} th:object="${newCliente}" method="POST" id="formu">
+                <div class="row">
+                    <div class="col-2">
+                        <label for="id_cliente" class="form-label">ID Cliente</label>
+                        <input th:field="*{id_cliente}" class="form-control form-control-sm" type="text" placeholder="ID" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="col-2">
+                        <label for="dni" class="form-label">DNI</label>
+                        <input th:field="*{dniClie}" class="form-control form-control-sm" type="text" placeholder="Numero de DNI" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="col-6">
+                        <label for="nomClie" class="form-label">Apellido y Nombre</label>
+                        <input th:field="*{nomClie}" class="form-control form-control-sm" type="text" placeholder="Apellido y Nombre" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="col-2">
+                        <label for="celular" class="form-label">Celular</label>
+                        <input th:field="*{celular}" class="form-control form-control-sm" type="text" placeholder="Celular" aria-label=".form-control-sm example">
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col" id="btn-formu">
+                        <button type="submit" class="btn btn-primary"><i class="icon ion-md-checkbox"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-secondary"><i class="icon ion-md-backspace"></i> Limpiar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="row">
+            <table class="table table-hover my-3 txtcenter" id="listado">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>ID:</th>
+                        <th>DNI:</th>
+                        <th>APELLIDO Y NOMBRE:</th>
+                        <th>CELULAR:</th>
+                        <th>ACCIONES:</th>
+                    </tr>
+                </thead>
+                <tbody class="thead-dark">
+                    <tr th:each="cl:${Cliente}">
+                        <td th:text="${cl.id_cliente}"></td>
+                        <td th:text="${cl.dniClie}"></td>
+                        <td th:text="${cl.nomClie}"></td>
+                        <td th:text="${cl.celular}"></td>
+                        <td>
+                            <a class="btn btn-success btn-sm" th:href="@{/editCliente/} + ${cl.id_cliente}" title="Modificar" data-bs-toggle="modal" data-bs-target="#editarCliente">
+                                <i class="icon ion-md-create"></i></a>
+                            <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#borrarCliente"> 
+                                <i class="icon ion-md-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </main>
+    
+       <!----------------- MODALES----------------------- -->
+    <!-- MODAL editar  -->
+
+      <div class="modal fade" id="editarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"><i class="icon ion-md-create"></i> Editar cliente</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action=@{/saveCliente} th:object="${editCliente}" method="POST">
+                        <div class="col-md">
+                            <label for="id_cliente" class="form-label">Id:</label>
+                            <input th:field="*{id_cliente}" class="form-control form-control-sm" type="text" placeholder="ID" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="dniClie" class="form-label">DNI:</label>
+                            <input th:field="*{dniClie}" class="form-control form-control-sm" type="text" placeholder="Numero de DNI" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="nomClie" class="form-label">Apellido y Nombre:</label>
+                            <input th:field="*{nomClie}" class="form-control form-control-sm" type="text" placeholder="Apellido y Nombre" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="celular" class="form-label">Celular:</label>
+                            <input th:field="*{celular}" class="form-control form-control-sm" type="text" placeholder="Celular" aria-label=".form-control-sm example">
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+        <!-- MODAL BORRAR ESTA SEGURO?  -->
+      <div class="modal fade" th:each="cl:${Cliente}" id="borrarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"> <i class="icon ion-md-trash"></i> Eliminar Cliente</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Esta seguro de eliminar al cliente</p>
+            </div>
+            <div class="modal-footer">
+              <a type="button" class="btn btn-primary" th:href="@{/delCliente/} + ${cl.id_cliente}" title="Eliminar">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <!--PIE DE PAGINA-->
+    <footer th:replace="template :: footer" style="background-color: #86b28b;"></footer>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="template :: head(title)">
+</head>
+
+<!-- BODY -->
+<body>
+    <!-- ENCABEZADO -->
+    <header th:replace="template :: header"></header>
+    
+    <!-- CONTENIDO -->
+    
+    
+    <main>
+        <br>
+    <div class="container">
+        <div class="row">
+            <h5 class="txtcenter">Registro de Empleados</h5>
+            <br>
+            <form th:action=@{/saveEmpleado} th:object="${newEmpleado}" method="POST" id="formu">
+                <div class="row">
+                    <div class="col-2">
+                        <label for="id_emp" class="form-label">ID</label>
+                        <input th:field="*{id_emp}" class="form-control form-control-sm" type="text" placeholder="ID Empleado" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="col-6">
+                        <label for="nomEmp" class="form-label">Apellido y Nombre</label>
+                        <input th:field="*{nomEmp}" class="form-control form-control-sm" type="text" placeholder="Apellido y Nombre" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="col-2">
+                        <label for="dniEmp" class="form-label">DNI</label>
+                        <input th:field="*{dniEmp}" class="form-control form-control-sm" type="text" placeholder="Numero de DNI" aria-label=".form-control-sm example">
+                    </div>
+                    <div class="col-2">
+                        <label for="cargo" class="form-label">Cargo</label>
+                        <input th:field="*{cargo}" class="form-control form-control-sm" type="text" placeholder="Cargo" aria-label=".form-control-sm example">
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col" id="btn-formu">
+                        <button type="submit" class="btn btn-primary"><i class="icon ion-md-checkbox"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-secondary"><i class="icon ion-md-backspace"></i> Limpiar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="row">
+            <table class="table table-hover my-3 txtcenter" id="listado">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>ID:</th>
+                        <th>APELLIDO Y NOMBRE:</th>
+                        <th>DNI:</th>
+                        <th>CARGO:</th>
+                        <th>ACCIONES:</th>
+                    </tr>
+                </thead>
+                <tbody class="thead-dark">
+                    <tr th:each="em:${Empleado}">
+                        <td th:text="${em.id_emp}"></td>
+                        <td th:text="${em.nomEmp}"></td>
+                        <td th:text="${em.dniEmp}"></td>
+                        <td th:text="${em.cargo}"></td>
+                        <td>
+                            <a class="btn btn-success btn-sm" th:href="@{/editEmpleado/} + ${em.id_emp}" title="Modificar" data-bs-toggle="modal" data-bs-target="#editarEmpleado">
+                                <i class="icon ion-md-create"></i></a>
+                            <a class="btn btn-danger btn-sm"  title="Eliminar" data-bs-toggle="modal" data-bs-target="#borrarEmpleado"> 
+                                <i class="icon ion-md-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </main>
+     <!----------------- MODALES----------------------- -->
+          <!-- MODAL editar  -->
+
+      <div class="modal fade" id="editarEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"><i class="icon ion-md-create"></i> Editar empleado</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action=@{/saveEmpleado} th:object="${editEmpleado}" method="POST">
+                        <div class="col-md">
+                            <label for="id_emp" class="form-label">Id</label>
+                            <input th:field="*{id_emp}"class="form-control form-control-sm" type="text" placeholder="ID Empleado" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="nomEmp" class="form-label">Apellido y Nombre</label>
+                            <input th:field="*{nomEmp}" class="form-control form-control-sm" type="text" placeholder="Apellido y Nombre" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="dniEmp" class="form-label">DNI</label>
+                            <input th:field="*{dniEmp}"class="form-control form-control-sm" type="text" placeholder="Numero de DNI" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="cargo" class="form-label">Cargo</label>
+                            <input th:field="*{cargo}"class="form-control form-control-sm" type="text" placeholder="Cargo" aria-label=".form-control-sm example">
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+ <!-- MODAL BORRAR ESTA SEGURO?  -->
+      <div class="modal fade" th:each="em:${Empleado}" id="borrarEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"> <i class="icon ion-md-trash"></i> Eliminar Empleado</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Esta seguro de eliminar el registro del Empleado</p>
+            </div>
+            <div class="modal-footer">
+              <a th:href="@{/delEmpleado/} + ${em.id_emp}" type="button" class="btn btn-primary">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+ 
+    
+    <!--PIE DE PAGINA-->
+    <footer th:replace="template :: footer" style="background-color: #86b28b;"></footer>
+</body>
+
+</html>
