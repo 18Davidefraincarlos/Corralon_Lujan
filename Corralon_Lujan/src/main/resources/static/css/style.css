@@ -1,0 +1,143 @@
+#inicio{
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	margin-top: auto;
+	background-color: rgb(241, 241, 241, 0.9)!important;
+	min-height: 100vh;
+}
+
+#inicio-lujan{
+	justify-content: center;
+	background-color: rgb(241, 241, 241, 0.9)!important;
+	align-items: center;
+	margin-top: 15px;
+	min-height: 100vh;
+	text-align: center;
+	display: flex;
+	margin-top: 50px;
+}
+
+#menu-inicio{
+	border:solid rgb(215, 215, 215);
+	border-radius: 5px;
+}
+
+#inicio-img{
+	align-items: center;
+	width:225px;
+	height:125px;
+	margin: 30px;
+}
+
+#inicio-img-2{
+	align-items: relative;
+	width:100px;
+	height:100px;
+	margin: 15px;
+	filter: grayscale(1);
+	cursor: pointer;
+	
+}
+
+
+#inicio-img-2:hover{
+	filter: grayscale(0);
+}
+
+#inicio-img-2 a{
+	text-decoration: none;
+}
+
+#enlaces{
+	position: relative;
+}
+
+#enlace-inicio{
+	text-decoration: none;
+	color:black;
+}
+
+#formu-login{
+	
+	border-radius: 2px;
+	justify-content: left;
+	align-items: center;
+	display: flex;
+	padding: 5px;
+	margin: 75px;
+}
+
+
+#formu-login .form-img{
+	position: relative;
+	align-items: center;
+	width:185px;
+	height:110px;
+	margin: 5px;
+}
+
+#formu {
+	background-color: #f3f4f5!important;
+	border:solid rgb(215, 215, 215);
+	border-radius: 5px;
+	justify-content: center;
+	align-items: center;
+	padding: 5px;
+	position: relative;
+}
+
+#btn-formu{
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+	display: contents;
+}
+
+
+#listado {
+	border:solid rgb(215, 215, 215);
+	border-radius: 5px;
+	padding: 20px;
+}
+
+#factura{
+	overflow: hidden;
+	padding: 0;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+#factura .form-factura{
+	background-color: #f3f4f5!important;
+	border:solid rgb(215, 215, 215);
+  	border-radius:5px;
+	position: relative;
+	float: left;
+	width: 50%;
+}
+
+#factura .vtaPreviaFactura{
+	background-color: #f3f4f5!important;
+	border:solid rgb(215, 215, 215);
+  	border-radius:5px;
+	position: relative;
+	float: right;
+	width: 49%;
+}
+
+#btn-factura{
+	margin: 7px;
+	display: block;
+	position: relative;
+	align-items: center;
+}
+
+
+#pie{
+	text-align: center;
+	vertical-align: middle;
+	font-size: medium;
+}

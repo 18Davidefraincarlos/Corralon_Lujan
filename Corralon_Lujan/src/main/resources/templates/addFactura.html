@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="template :: head(title)">
+</head>
+
+<!-- BODY -->
+<body>
+    <!-- ENCABEZADO -->
+    <header th:replace="template :: header"></header>
+    
+    <!-- CONTENIDO -->
+          <!-- CONTENIDO -->
+    <main>
+        <div class="container" id="factura">
+                <div class="form-factura">
+                    <div class="row p-2">
+                        <h5>Nueva factura</h5>
+                        <form th:action=@{/saveFactura} th:object="${newFactura}" method="POST">
+                            <div class="row">
+                                <div class="col-6 mb-2">
+                                     <label for="id_factura" class="form-label">ID Factura</label>
+                                    <input th:field="*{id_factura}" class="form-control form-control-sm" type="number">
+                                    <br>
+                                    <label for="id_cliente" class="form-label">Cliente</label>
+                                   
+							  	<select  th:field="*{cliente}" >
+									<option th:each="c:${cliente}" th:value="${c.id_cliente}" th:text="${c.nomClie}"/>
+								</select>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <label for="id_emp" class="form-label">Vendedor</label><br>
+                                        <select th:field="*{empleado}" class="form-select-sm">
+                                            <option value="0">Seleccione el empleado</option>
+                                            <option th:each="em:${empleado}" th:value="${em.id_emp}" th:text="${em.nomEmp}">
+                                            </option>
+                                        </select>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <label for="fecha" class="form-label">Fecha</label>
+                                    <input th:field="*{fecha}" class="form-control form-control-sm" type="date">
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <label for="formapago" class="form-label">Forma de pago</label>
+                                    <select class="form-select-sm" th:field="*{formapago}">
+                                        <option value="0">Selecciona un medio de pago</option>
+                                        <option value="Efectivo">Efectivo</option>
+                                        <option value="Credito">Credito<</option>
+                                        <option value="Debito">Debito<</option>
+                                    </select>
+                                </div>
+                                <div class="d-grid gap-2 col" id="btn-factura">
+                                    <button type="submit" class="btn btn-primary"><i class="icon ion-md-basket"></i> Confirmar</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <div>
+                            <label class="form-label">Seleccione los productos</label>
+                            <table class="table table-hover my-1 txtcenter">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>CODIGO:</th>
+                                        <th>DESCRIPCION:</th>
+                                        <th>CANTIDAD:</th>
+                                        <th>PRECIO:</th>
+                                        <th>ACCIONES:</th>
+                                    </tr>
+                                </thead>
+                                 <tbody class="thead-dark">
+                                    <tr th:each="pr:${producto}">
+                                        <td th:text="${pr.id_prod}"></td>
+                                        <td th:text="${pr.descripcion}"></td>
+                                        <td th:text="${pr.stock}"></td>
+                                        <td th:text="${pr.precio}"></td>
+                                        <td>
+                                            <a class="btn btn-success btn-sm"  title="Agregar" >
+                                                <i class="icon ion-md-add"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>  
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="vtaPreviaFactura">
+                    <div class="row p-2">
+                        <div>
+                            <h5>Detalle de la venta</h5>
+                            <table class="table table-hover my-3 txtcenter">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>CODIGO:</th>
+                                        <th>DESCRIPCION:</th>
+                                        <th>CANTIDAD:</th>
+                                        <th>SUBTOTAL:</th>
+                                        <th>ACCIONES:</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="thead-dark">
+                                <!--     <tr th:each="det:${Detalle}">
+                                        <td th:text="${det.producto.id}"></td>
+                                        <td th:text="${det.producto.descripcion}"></td>
+                                        <td th:text="${det.cantidad}"></td>
+                                        <td th:text="${cl.subtotal}"></td>
+                                        <td>
+                                            <a class="btn btn-danger btn-sm" th:href="@{/delDetalle/} + ${det.id_detalle}" title="Quitar" >
+                                                <i class="icon ion-md-trash"></i></a>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                                <div><h5>Total:</h5></div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </main>
+   
+   
+           
+    <!--PIE DE PAGINA-->
+    <footer th:replace="template :: footer" style="background-color: #86b28b;"></footer>
+</body>
+
+</html>

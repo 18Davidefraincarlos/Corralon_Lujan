@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="template :: head(title)">
+</head>
+
+<!-- BODY -->
+<body>
+    <!-- ENCABEZADO -->
+    <header th:replace="template :: header"></header>
+    
+    <!-- CONTENIDO -->
+   
+    <main>
+        <br>
+    <div class="container">
+        <div class="row">
+            <br>
+            <form th:action=@{/saveProducto} th:object="${newProducto}" method="POST" id="formu">
+                <h5 class="txtcenter">Registro de Productos</h5>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="id_prod" class="form-label">Codigo</label>
+                        <input th:field="*{id_prod}" class="form-control form-control-sm" type="text" placeholder="Codigo">
+                    </div>
+                    <div class="col-6">
+                        <label for="descripcion" class="form-label">Descripcion</label>
+                        <input th:field="*{descripcion}" class="form-control form-control-sm" type="text" placeholder="Descripcion">
+                    </div>
+                    <div class="col-2">
+                        <label for="precio" class="form-label">Precio</label>
+                        <input th:field="*{precio}"class="form-control form-control-sm" type="text" placeholder="Precio">
+                    </div>
+                    <div class="col-2">
+                        <label for="stock" class="form-label">Cantidad</label>
+                        <input th:field="*{stock}" class="form-control form-control-sm" type="text" placeholder="Cantidad">
+                    </div>
+                </div>
+                <div class="row m-3">
+                    <div class="btn-group" id="btn-formu">
+                        <button type="submit" class="btn btn-primary btn-sm" id="confirmar"><i class="icon ion-md-checkbox"></i> Confirmar</button>
+                        <button type="reset" class="btn btn-secondary btn-sm"><i class="icon ion-md-backspace"></i> Limpiar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="row">
+            <table class="table table-hover my-3 txtcenter" id="listado">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>CODIGO:</th>
+                        <th>DESCRIPCION:</th>
+                        <th>PRECIO UNITARIO:</th>
+                        <th>STOCK:</th>
+                        <th>ACCIONES:</th>
+                    </tr>
+                </thead>
+                <tbody class="thead-dark">
+                    <tr th:each="pr:${Producto}">
+                        <td th:text="${pr.id_prod}"></td>
+                        <td th:text="${pr.descripcion}"></td>
+                        <td th:text="${pr.precio}"></td>
+                        <td th:text="${pr.stock}"></td>
+                        <td>
+                            <a class="btn btn-success btn-sm" th:href="@{/editProducto/${pr.getId_prod}} " title="Modificar" data-bs-toggle="modal" 
+                            data-bs-target="#editarProducto">
+                                <i class="icon ion-md-create"></i></a>
+                            <a class="btn btn-danger btn-sm"  title="Eliminar" data-bs-toggle="modal" 
+								th:attr="data-bs-target='#borrarProducto'+${pr.getId_prod()}"> 
+                                <i class="icon ion-md-trash"></i></a>
+                        </td>
+                        
+                        
+						<!-- Start: Modal de confirmación de borrado de Producto -->
+						<div class="modal fade" th:id="borrarProducto+${pr.getId_prod()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+							  <div class="modal-content">
+								<div class="modal-header bg-danger">
+								  <h5 class="modal-title" id="exampleModalLabel"> <i class="icon ion-md-trash"></i> Eliminar Producto</h5>
+								  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+								  <p>Esta seguro qué desea eliminar el producto </p>
+								</div>
+								<div class="modal-footer">
+									<a th:href="@{/delProducto/{id}(id=${pr.id_prod})}">
+										<span class="btn btn-danger" value="delete">Eliminar</span>
+									</a>
+								</div>
+							  </div>
+							</div>
+						</div>
+						<!-- End: Modal de confirmación de borrado de Producto -->
+						
+						
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </main>
+    
+    <!----------------- MODALES----------------------- -->
+    <!-- MODAL editar  -->
+     <div class="modal fade" id="editarProducto" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"><i class="icon ion-md-create"></i> Editar producto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action=@{/saveProducto} th:object="${editProducto}" method="POST">
+                        <div class="col-md">
+                            <label for="id_prod" class="form-label">Codigo</label>
+                            <input th:field="*{id_prod}" class="form-control form-control-sm" type="text" placeholder="Codigo" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="descripcion" class="form-label">Descripcion</label>
+                            <input th:field="*{descripcion}" class="form-control form-control-sm" type="text" placeholder="Descripcion" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="precio" class="form-label">Precio</label>
+                            <input th:field="*{precio}" class="form-control form-control-sm" type="text" placeholder="Precio" aria-label=".form-control-sm example">
+                        </div>
+                        <div class="col-md">
+                            <label for="stock" class="form-label">Cantidad</label>
+                            <input th:field="*{stock}" class="form-control form-control-sm" type="text" placeholder="Cantidad" aria-label=".form-control-sm example">
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+    <!--PIE DE PAGINA-->
+    <footer th:replace="template :: footer" style="background-color: #86b28b;"></footer>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <script serc="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title th:text="${title}"></title>
+</head>
+<!-- BODY -->
+
+<body>
+    <!-- ENCABEZADO -->
+    <header th:fragment="header">
+        <nav class="navbar navbar-expand-lg" style="background-color: #86b28b;">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/inicio}">
+                    <img src="images/CORRALON.png" alt="Lujan" width="65" height="35">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/Producto}">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/Cliente}">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/Factura}">Facturas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/Detalle}">Detalles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/Administracion}">Administracion</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Usuario
+                            </a>
+                            <ul class="dropdown-menu me-auto" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Root</a></li>
+                                <li><a class="dropdown-item" th:href="@{/index}">Cerrar Seccion</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- CONTENIDO -->
+    <main>
+        <h3>Aca va el contenido</h3>
+    </main>
+
+    <!--PIE DE PAGINA-->
+    <footer th:fragment="footer" style="background-color: #86b28b;">
+        <div class="container text-dark text-center" id="pie">
+            <p id="pie">
+                Corralon Lujan<br> Derechos Reservados &copy; 2022 <br>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
