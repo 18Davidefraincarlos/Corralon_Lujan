@@ -66,9 +66,33 @@
                         <td>
                             <a class="btn btn-success btn-sm" th:href="@{/editProducto/} + ${pr.id_prod}" title="Modificar" data-bs-toggle="modal" data-bs-target="#editarProducto">
                                 <i class="icon ion-md-create"></i></a>
-                            <a class="btn btn-danger btn-sm"  title="Eliminar" data-bs-toggle="modal" data-bs-target="#borrarProducto"> 
+                            <a class="btn btn-danger btn-sm"  title="Eliminar" data-bs-toggle="modal" 
+								th:attr="data-bs-target='#borrarProducto'+${pr.getId_prod()}"> 
                                 <i class="icon ion-md-trash"></i></a>
                         </td>
+						<!-- Start: Modal de confirmación de borrado de Producto -->
+						<div class="modal fade" th:id="borrarProducto+${pr.getId_prod()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+							  <div class="modal-content">
+								<div class="modal-header">
+								  <h5 class="modal-title" id="exampleModalLabel"> <i class="icon ion-md-trash"></i> Eliminar Producto</h5>
+								  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+								  <p>Esta seguro qué desea eliminar el producto </p>
+								</div>
+								<div class="modal-footer">
+									<button class="btn " data-dismiss="modal" aria-hidden="true">
+										Cancelar
+									</button>
+									<a th:href="@{/delProducto/{id}(id=${pr.id_prod})}">
+										<span class="btn btn-danger" value="delete">Eliminar</span></a>
+
+								</div>
+							  </div>
+							</div>
+						</div>
+						<!-- End: Modal de confirmación de borrado de Producto -->
                     </tr>
                 </tbody>
             </table>
@@ -112,27 +136,7 @@
           </div>
         </div>
       </div>
-     <!-- MODAL BORRAR ESTA SEGURO?  -->
-      <div class="modal fade" th:each="pr:${Producto}" id="borrarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel"> <i class="icon ion-md-trash"></i> Eliminar Producto</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Esta seguro de eliminar el producto</p>
-            </div>
-            <div class="modal-footer">
-              <a th:href="@{/delProducto/} + ${pr.id_prod}" type="button" class="btn btn-primary">Eliminar</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-    
-    
-    
+          
     <!--PIE DE PAGINA-->
     <footer th:replace="template :: footer" style="background-color: #86b28b;"></footer>
 </body>
